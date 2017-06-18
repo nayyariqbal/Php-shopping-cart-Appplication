@@ -1,0 +1,27 @@
+// JavaScript Document
+var xmlHttp;
+function SoapCall() {
+// creatng the xmlHttp object
+xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+// Calling the web service using post and true means asynchronous call
+xmlHttp.open("post", "http://www.webservicex.net/CurrencyConvertor.asmx", false);
+// Setting the request header to let the web service identify the soap request we would be sending
+
+xmlHttp.setRequestHeader("Content-Type", "text/xml; charset=utf-8″);
+
+xmlHttp.setRequestHeader("SOAPAction", "http://www.webserviceX.NET/ConversionRate");
+
+var soapRequest = "<?xml version='1.0′ encoding='utf-8′?> " +
+"<soap12:Envelope xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:xsd='http://www.w3.org/2001/XMLSchema' xmlns:soap12='http://www.w3.org/2003/05/soap-envelope'>" +
+" <soap12:Body>" +
+"   <ConversionRate xmlns='http://www.webserviceX.NET/'>" +
+"     <FromCurrency>USD</FromCurrency>" +
+"    <ToCurrency>INR</ToCurrency>" +
+"  </ConversionRate>" +
+"</soap12:Body>" +
+"</soap12:Envelope>";
+
+xmlHttp.send(soapRequest);
+alert(xmlHttp.responseText);
+
+}
